@@ -14,8 +14,9 @@ function App() {
   return (
     <ConfigProvider locale={zhCN}>
       <Layout className={style.layout}>
-        <Header>
+        <Header className={style.header}>
           <h1 className={style.title}>Token Swap</h1>
+          <Button>连接钱包</Button>
         </Header>
         <Content className={style.content}>
           <Form className={style.form}>
