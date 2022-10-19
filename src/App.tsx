@@ -13,7 +13,7 @@ moment.locale('zh-cn');
 function App() {
   return (
     <ConfigProvider locale={zhCN}>
-      <Layout style={{ height: '100%' }}>
+      <Layout className={style.layout}>
         <Header>
           <h1 className={style.title}>Token Swap</h1>
         </Header>
