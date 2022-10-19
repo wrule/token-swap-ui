@@ -18,21 +18,23 @@ function App() {
           <h1 className={style.title}>Token Swap</h1>
         </Header>
         <Content className={style.content}>
-          <Form>
+          <Form className={style.form}>
             <Form.Item>
               <InputNumber
+                className={style.form_item}
                 min={0}
                 addonAfter="USDC"
               />
             </Form.Item>
             <Form.Item>
               <InputNumber
+                className={style.form_item}
                 min={0}
                 addonAfter="USDM"
               />
             </Form.Item>
             <Form.Item>
-              <Button type="primary">Swap</Button>
+              <Button className={style.form_item} type="primary">Swap</Button>
             </Form.Item>
           </Form>
         </Content>
