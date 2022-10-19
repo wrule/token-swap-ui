@@ -1,12 +1,16 @@
-import React from 'react';
-import logo from './logo.svg';
-import style from './App.module.scss';
+import { ConfigProvider, Button } from 'antd';
+import zhCN from 'antd/es/locale/zh_CN';
+import moment from 'moment';
+import 'moment/locale/zh-cn';
+import 'antd/dist/antd.min.css';
+
+moment.locale('zh-cn');
 
 function App() {
   return (
-    <div>
-      <span>你好，世界</span>
-    </div>
+    <ConfigProvider locale={zhCN}>
+      <Button>你好，世界</Button>
+    </ConfigProvider>
   );
 }
 
