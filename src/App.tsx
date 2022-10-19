@@ -1,4 +1,4 @@
-import { ConfigProvider, Layout } from 'antd';
+import { Button, ConfigProvider, Form, InputNumber, Layout } from 'antd';
 import zhCN from 'antd/es/locale/zh_CN';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
@@ -17,7 +17,25 @@ function App() {
         <Header>
           <h1 className={style.title}>Token Swap</h1>
         </Header>
-        <Content className={style.content}>Content</Content>
+        <Content className={style.content}>
+          <Form>
+            <Form.Item>
+              <InputNumber
+                min={0}
+                addonAfter="USDC"
+              />
+            </Form.Item>
+            <Form.Item>
+              <InputNumber
+                min={0}
+                addonAfter="USDM"
+              />
+            </Form.Item>
+            <Form.Item>
+              <Button type="primary">Swap</Button>
+            </Form.Item>
+          </Form>
+        </Content>
       </Layout>
     </ConfigProvider>
   );
