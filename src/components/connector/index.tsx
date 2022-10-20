@@ -7,7 +7,7 @@ declare var ethereum: any;
 export
 function Connector() {
   const [account, set_account] = useState<string>('');
-  const [loading, set_loading] = useState<boolean>(true);
+  const [loading, set_loading] = useState<boolean>(false);
 
   const update_account = async () => {
     console.log(1);
@@ -28,7 +28,7 @@ function Connector() {
   }
 
   useEffect(() => {
-    update_account();
+    // update_account();
   }, []);
 
   return <Space className={style.com}>
@@ -38,7 +38,7 @@ function Connector() {
     </Space>}
     {!loading && <>
       {account && <Tooltip placement='bottomLeft' title={account}><span>{account}</span></Tooltip>}
-      {!account && <Button size="small" type="primary">连接钱包</Button>}
+      {!account && <Button size="small" type="primary" onClick={update_account}>连接钱包</Button>}
     </>}
   </Space>;
 }
