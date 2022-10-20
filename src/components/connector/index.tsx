@@ -36,7 +36,7 @@ function Connector() {
     fetch_account();
   }, []);
 
-  return <Space className={style.com}>
+  return <span className={style.com}>
     {fetch_loading && <Space>
       <Spin size="small" />
       <span>正在获取账户...</span>
@@ -46,8 +46,8 @@ function Connector() {
       <span>正在连接钱包...</span>
     </Space>}
     {!(fetch_loading || connect_loading) && <>
-      {account && <Tooltip placement='bottomLeft' title={account}><span>{account}</span></Tooltip>}
+      {account && <Tooltip placement='bottomLeft' title={account}><span className={style.account}>{account}</span></Tooltip>}
       {!account && <Button size="small" type="primary" onClick={connect_account}>连接钱包</Button>}
     </>}
-  </Space>;
+  </span>;
 }
