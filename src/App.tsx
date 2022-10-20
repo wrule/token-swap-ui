@@ -8,6 +8,7 @@ import style from './App.module.scss';
 import { useEffect, useState } from 'react';
 import { Connector } from './components/connector';
 import Web3 from 'web3';
+import { ethers } from 'ethers';
 declare var ethereum: any;
 const web3 = new Web3(ethereum);
 
@@ -17,8 +18,12 @@ moment.locale('zh-cn');
 
 function App() {
   const test = async () => {
-    console.log(1234);
-    const accounts = await web3.eth.getAccounts();
+    // console.log(1234);
+    // const accounts = await web3.eth.getAccounts();
+    // console.log(accounts);
+    const provider = new ethers.providers.Web3Provider(ethereum);
+    // const accounts = await provider.listAccounts();
+    const accounts = await provider.send("eth_requestAccounts", []);
     console.log(accounts);
   };
 
