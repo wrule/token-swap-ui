@@ -7,14 +7,25 @@ import './App.scss';
 import style from './App.module.scss';
 import { useEffect, useState } from 'react';
 import { Connector } from './components/connector';
-
+import Web3 from 'web3';
 declare var ethereum: any;
+const web3 = new Web3(ethereum);
 
 const { Header, Content } = Layout;
 
 moment.locale('zh-cn');
 
 function App() {
+  const test = async () => {
+    console.log(1234);
+    const accounts = await web3.eth.getAccounts();
+    console.log(accounts);
+  };
+
+  useEffect(() => {
+    test();
+  }, []);
+
   return (
     <ConfigProvider locale={zhCN}>
       <Layout className={style.layout}>
