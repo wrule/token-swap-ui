@@ -33,6 +33,9 @@ function Connector() {
   }
 
   useEffect(() => {
+    ethereum.on('accountsChanged', (accounts: string[]) => {
+      set_account(accounts[0] || '');
+    });
     fetch_account();
   }, []);
 
