@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Spin, Tooltip } from 'antd';
+import { Button, Spin, Tooltip, Space } from 'antd';
 import style from './index.module.scss';
 
 declare var ethereum: any;
@@ -31,11 +31,14 @@ function Connector() {
     update_account();
   }, []);
 
-  return <Spin spinning={loading}>
-    <span className={style.com}>
-      {account ? <Tooltip placement='bottomLeft' title={account}>
-        <span>{account}</span>
-      </Tooltip> : <Button size="small">连接钱包</Button>}
-    </span>
-  </Spin>;
+  return <Space className={style.com}>
+    {loading && <Space>
+      <Spin size="small" />
+      <span>正在连接钱包...</span>
+    </Space>}
+    {!loading && <>
+      {account && <Tooltip placement='bottomLeft' title={account}><span>{account}</span></Tooltip>}
+      {!account && <Button size="small" type="primary">连接钱包</Button>}
+    </>}
+  </Space>;
 }
