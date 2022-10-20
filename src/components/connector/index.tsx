@@ -28,7 +28,9 @@ function Connector() {
   }
 
   useEffect(() => {
-    // update_account();
+    setTimeout(() => {
+      console.log(ethereum.selectedAddress);
+    }, 1000);
   }, []);
 
   return <Space className={style.com}>

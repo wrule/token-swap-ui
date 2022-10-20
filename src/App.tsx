@@ -15,8 +15,6 @@ const { Header, Content } = Layout;
 moment.locale('zh-cn');
 
 function App() {
-  const [account, set_account] = useState<string>('');
-
   return (
     <ConfigProvider locale={zhCN}>
       <Layout className={style.layout}>
@@ -42,7 +40,9 @@ function App() {
               />
             </Form.Item>
             <Form.Item>
-              <Button className={style.form_item} type="primary">Swap</Button>
+              <Button onClick={() => {
+                console.log(ethereum.selectedAddress);
+              }} className={style.form_item} type="primary">Swap</Button>
             </Form.Item>
           </Form>
         </Content>
