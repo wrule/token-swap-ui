@@ -7,40 +7,47 @@ declare var ethereum: any;
 export
 function Connector() {
   const [account, set_account] = useState<string>('');
-  const [loading, set_loading] = useState<boolean>(false);
+  const [fetch_loading, set_fetch_loading] = useState<boolean>(false);
+  const [connect_loading, set_connect_loading] = useState<boolean>(false);
 
-  const update_account = async () => {
-    console.log(1);
-    set_loading(true);
-    console.log(2);
+  const fetch_account = async () => {
+    set_fetch_loading(true);
     try {
-      console.log('a');
-      const accounts: string[] = await ethereum.request({ method: 'eth_requestAccounts' });
-      console.log('b');
+      const accounts: string[] = await ethereum.request({ method: 'eth_accounts' });
       set_account(accounts[0] || '');
-      console.log('c');
     } catch (e) {
       console.error(e);
     }
-    console.log(3);
-    set_loading(false);
-    console.log(4);
+    set_fetch_loading(false);
+  };
+
+  const connect_account = async () => {
+    set_connect_loading(true);
+    try {
+      const accounts: string[] = await ethereum.request({ method: 'eth_requestAccounts' });
+      set_account(accounts[0] || '');
+    } catch (e) {
+      console.error(e);
+    }
+    set_connect_loading(false);
   }
 
   useEffect(() => {
-    setTimeout(() => {
-      console.log(ethereum.selectedAddress);
-    }, 1000);
+    fetch_account();
   }, []);
 
   return <Space className={style.com}>
-    {loading && <Space>
+    {fetch_loading && <Space>
+      <Spin size="small" />
+      <span>正在获取账户...</span>
+    </Space>}
+    {connect_loading && <Space>
       <Spin size="small" />
       <span>正在连接钱包...</span>
     </Space>}
-    {!loading && <>
+    {!(fetch_loading || connect_loading) && <>
       {account && <Tooltip placement='bottomLeft' title={account}><span>{account}</span></Tooltip>}
-      {!account && <Button size="small" type="primary" onClick={update_account}>连接钱包</Button>}
+      {!account && <Button size="small" type="primary" onClick={connect_account}>连接钱包</Button>}
     </>}
   </Space>;
 }
