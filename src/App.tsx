@@ -6,17 +6,25 @@ import 'antd/dist/antd.min.css';
 import './App.scss';
 import style from './App.module.scss';
 
+declare var ethereum: any;
+
 const { Header, Content } = Layout;
 
 moment.locale('zh-cn');
 
 function App() {
+
+  const handleConnect = async () => {
+    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+    console.log(accounts);
+  };
+
   return (
     <ConfigProvider locale={zhCN}>
       <Layout className={style.layout}>
         <Header className={style.header}>
           <h1 className={style.title}>Token Swap</h1>
-          <Button>连接钱包</Button>
+          <Button onClick={handleConnect}>连接钱包</Button>
         </Header>
         <Content className={style.content}>
           <Form className={style.form}>
