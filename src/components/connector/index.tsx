@@ -35,8 +35,7 @@ function Connector(props: IProps) {
   const connect_account = async () => {
     set_connect_loading(true);
     try {
-      const accounts: string[] = await ethereum.request({ method: 'eth_requestAccounts' });
-      set_account_wrapper(accounts[0]);
+      await ethereum.request({ method: 'eth_requestAccounts' });
     } catch (e) {
       console.error(e);
     }

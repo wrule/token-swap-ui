@@ -20,7 +20,9 @@ function App() {
       <Layout className={style.layout}>
         <Header className={style.header}>
           <h1 className={style.title}>Token Swap</h1>
-          <Connector />
+          <Connector onAccount={(account) => {
+            console.log(account);
+          }} />
           {/* {account ? <span>{account}</span> : <Button onClick={handleConnect}>连接钱包</Button>} */}
         </Header>
         <Content className={style.content}>
