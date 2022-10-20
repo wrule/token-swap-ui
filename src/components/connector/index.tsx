@@ -5,16 +5,27 @@ import style from './index.module.scss';
 declare var ethereum: any;
 
 export
-function Connector() {
+interface IProps {
+  onAccount?: (account: string) => void;
+}
+
+export
+function Connector(props: IProps) {
   const [account, set_account] = useState<string>('');
   const [fetch_loading, set_fetch_loading] = useState<boolean>(false);
   const [connect_loading, set_connect_loading] = useState<boolean>(false);
+
+  const set_account_wrapper = (account: string) => {
+    const account_string = account || '';
+    set_account(account_string);
+    if (props.onAccount) props.onAccount(account_string);
+  }
 
   const fetch_account = async () => {
     set_fetch_loading(true);
     try {
       const accounts: string[] = await ethereum.request({ method: 'eth_accounts' });
-      set_account(accounts[0] || '');
+      set_account_wrapper(accounts[0]);
     } catch (e) {
       console.error(e);
     }
@@ -25,7 +36,7 @@ function Connector() {
     set_connect_loading(true);
     try {
       const accounts: string[] = await ethereum.request({ method: 'eth_requestAccounts' });
-      set_account(accounts[0] || '');
+      set_account_wrapper(accounts[0]);
     } catch (e) {
       console.error(e);
     }
@@ -33,7 +44,7 @@ function Connector() {
   };
 
   const on_account_change = (accounts: string[]) => {
-    set_account(accounts[0] || '');
+    set_account_wrapper(accounts[0]);
   };
 
   useEffect(() => {
