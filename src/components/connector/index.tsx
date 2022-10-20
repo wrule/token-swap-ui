@@ -30,13 +30,18 @@ function Connector() {
       console.error(e);
     }
     set_connect_loading(false);
-  }
+  };
+
+  const on_account_change = (accounts: string[]) => {
+    set_account(accounts[0] || '');
+  };
 
   useEffect(() => {
-    ethereum.on('accountsChanged', (accounts: string[]) => {
-      set_account(accounts[0] || '');
-    });
+    ethereum.on('accountsChanged', on_account_change);
     fetch_account();
+    return () => {
+      ethereum.removeListener('accountsChanged', on_account_change);
+    };
   }, []);
 
   return <div className={style.com}>
