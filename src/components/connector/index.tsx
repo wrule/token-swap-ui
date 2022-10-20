@@ -10,14 +10,21 @@ function Connector() {
   const [loading, set_loading] = useState<boolean>(true);
 
   const update_account = async () => {
+    console.log(1);
     set_loading(true);
+    console.log(2);
     try {
+      console.log('a');
       const accounts: string[] = await ethereum.request({ method: 'eth_requestAccounts' });
+      console.log('b');
       set_account(accounts[0] || '');
+      console.log('c');
     } catch (e) {
       console.error(e);
     }
+    console.log(3);
     set_loading(false);
+    console.log(4);
   }
 
   useEffect(() => {

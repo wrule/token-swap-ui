@@ -17,19 +17,6 @@ moment.locale('zh-cn');
 function App() {
   const [account, set_account] = useState<string>('');
 
-  const handleConnect = async () => {
-
-  };
-
-  const update_account = async () => {
-    const accounts: string[] = await ethereum.request({ method: 'eth_requestAccounts' });
-    set_account(accounts[0] || '');
-  }
-
-  useEffect(() => {
-    update_account();
-  }, []);
-
   return (
     <ConfigProvider locale={zhCN}>
       <Layout className={style.layout}>
