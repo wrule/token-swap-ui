@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Spin, Tooltip, Space } from 'antd';
 import style from './index.module.scss';
 
@@ -18,7 +18,7 @@ function Connector() {
     } catch (e) {
       console.error(e);
     }
-    set_fetch_loading(false);
+    setTimeout(() => set_fetch_loading(false), 300);
   };
 
   const connect_account = async () => {
